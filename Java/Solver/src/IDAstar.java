@@ -7,37 +7,28 @@ public class IDAstar extends Tools {
     int[] scram = new int[N*N];
     int emptyPosition;
     int md;
-    int moves;
+    int moves = 0;
     char[] route = new char[MAX_MOVES];
 
-    int solutionCount;
+    int solutionCount = 0;
     int maxDistance;
 
     IDAstar(int[] scram) {
         this.scram = scram;
-        
-        // get index of empty tile
         emptyPosition = getEmptyIndex(scram);
-
-        // md 계산
         md = calcMD(scram, N);
-
-        moves = 0;
-
-        // init route
-        route[0] = '\0';
 
         solve();
     }
 
     public void solve() {
-        solutionCount = 0;
-
-        // already solve
+        // already solved
         if (md == 0) {
             System.out.println("Already solved");
             return;
         }
+
+        route[0] = '\0';
         
         for (maxDistance = md % 2; maxDistance < MAX_MOVES; maxDistance += 2) {
             System.out.println(maxDistance);

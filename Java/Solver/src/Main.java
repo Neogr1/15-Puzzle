@@ -1,6 +1,5 @@
 import java.util.Scanner;
 
-
 public class Main extends Tools {
     public static Scanner sc = new Scanner(System.in);
     private static int[] scram = new int[N*N];
@@ -9,7 +8,7 @@ public class Main extends Tools {
         System.out.println("Enter scramble:");
         String[] input = sc.nextLine().split(" ");
         System.out.println("Choose solver:");
-        System.out.println("(1) A* (2) IDA* (3) MT_IDA*");
+        System.out.println("(1) A* (2) IDA* (3) IDA* with PDB");
         int solverChoice = sc.nextInt();
         sc.close();
 
@@ -34,8 +33,9 @@ public class Main extends Tools {
             solveIDAstar();
             break;
         case 3:
-            solveMT_IDAstar();
+            solveIDAstar_PDB();
         }
+
    
     }
 
@@ -55,12 +55,12 @@ public class Main extends Tools {
         System.out.println("----- IDA* Solver Finish -----");
     }
 
-    private static void solveMT_IDAstar() {
-        System.out.println("----- Multithreaded IDA* Solver Start -----");
+    private static void solveIDAstar_PDB() {
+        System.out.println("----- IDA* with PDB Solver Start -----");
         long startTime = System.nanoTime();
-        new MT_IDAstar(scram);
+        new IDAstar_PDB(scram);
         System.out.println("Time: " + (System.nanoTime()-startTime)/1000000 + "ms");
-        System.out.println("----- Multithreaded IDA* Solver Finish -----");
+        System.out.println("----- IDA* with PDB Solver Finish -----");
     }
 
 }
