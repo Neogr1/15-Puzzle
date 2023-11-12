@@ -8,7 +8,7 @@ public class Main extends Tools {
         System.out.println("Enter scramble:");
         String[] input = sc.nextLine().split(" ");
         System.out.println("Choose solver:");
-        System.out.println("(1) A* (2) IDA* (3) IDA* with PDB");
+        System.out.print("(1) A*\n(2) IDA*\n(3) IDA* - 555 PDB\n(4) IDA* - 663 PDB\n>>> ");
         int solverChoice = sc.nextInt();
         sc.close();
 
@@ -33,7 +33,10 @@ public class Main extends Tools {
             solveIDAstar();
             break;
         case 3:
-            solveIDAstar_PDB();
+            solveIDAstar_555PDB();
+            break;
+        case 4:
+            solveIDAstar_663PDB();
         }
 
    
@@ -55,12 +58,19 @@ public class Main extends Tools {
         System.out.println("----- IDA* Solver Finish -----");
     }
 
-    private static void solveIDAstar_PDB() {
-        System.out.println("----- IDA* with PDB Solver Start -----");
+    private static void solveIDAstar_555PDB() {
+        System.out.println("----- IDA* with 555 PDB Solver Start -----");
         long startTime = System.nanoTime();
-        new IDAstar_PDB(scram);
+        new IDAstar_555PDB(scram);
         System.out.println("Time: " + (System.nanoTime()-startTime)/1000000 + "ms");
-        System.out.println("----- IDA* with PDB Solver Finish -----");
+        System.out.println("----- IDA* with 555 PDB Solver Finish -----");
     }
 
+    private static void solveIDAstar_663PDB() {
+        System.out.println("----- IDA* with 663 PDB Solver Start -----");
+        long startTime = System.nanoTime();
+        new IDAstar_663PDB(scram);
+        System.out.println("Time: " + (System.nanoTime()-startTime)/1000000 + "ms");
+        System.out.println("----- IDA* with 663 PDB Solver Finish -----");
+    }
 }

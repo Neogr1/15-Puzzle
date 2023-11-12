@@ -27,8 +27,8 @@ public class PDB555 {
         id555[2] = getIdAndDis(data555[2], 5);
 
         for (int i = 0; i < id555[0].length; i++) pdbDis555[0][id555[0][i][0]] = id555[0][i][1];
-        for (int i = 0; i < id555[0].length; i++) pdbDis555[1][id555[1][i][0]] = id555[1][i][1];
-        for (int i = 0; i < id555[0].length; i++) pdbDis555[2][id555[2][i][0]] = id555[2][i][1];
+        for (int i = 0; i < id555[1].length; i++) pdbDis555[1][id555[1][i][0]] = id555[1][i][1];
+        for (int i = 0; i < id555[2].length; i++) pdbDis555[2][id555[2][i][0]] = id555[2][i][1];
     }
     
     private int[][] loadData(String fileName) throws IOException {
