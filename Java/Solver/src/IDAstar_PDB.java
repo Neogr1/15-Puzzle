@@ -31,7 +31,6 @@ public class IDAstar_PDB extends Tools {
 
         route[0] = '\0';
         
-        // for (maxDistance = dis % 2; maxDistance < 3; maxDistance += 2) {
         for (maxDistance = dis.getPDB_Distance(); maxDistance < MAX_MOVES; maxDistance += 2) {
             System.out.println(maxDistance);
 
