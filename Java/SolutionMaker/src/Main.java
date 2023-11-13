@@ -10,7 +10,9 @@ public class Main extends Tools {
     static List<Integer> shuffle = new ArrayList<>();
     static int[] scram = new int[N*N];
 
+    static PDB663 dis = new PDB663();
     public static void main(String[] args) {
+
         for (int i = 0; i < N*N; i++) {
             shuffle.add(i);
         }
@@ -33,7 +35,8 @@ public class Main extends Tools {
             System.out.println();
 
             // solve
-            Solver solver = new Solver(scram);
+            Solver_PDB solver = new Solver_PDB(scram, dis);
+            solver.solve();
             
             // write the solution
             try (FileWriter writer = new FileWriter("solutions/solutions.csv", true)) {

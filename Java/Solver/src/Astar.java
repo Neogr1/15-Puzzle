@@ -25,10 +25,7 @@ public class Astar extends Tools {
         priorityQueue = new PriorityQueue<>((s1, s2) -> Integer.compare(s1.md + s1.moves, s2.md + s2.moves));
         priorityQueue.offer(scramInfo);
 
-
-        System.out.println("----- A* Solver Start -----");
         solve();
-        System.out.println("------ A* Solver End ------");
     }
 
     public void solve() {

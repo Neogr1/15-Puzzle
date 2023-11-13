@@ -34,10 +34,10 @@ public class IDAstar_663PDB extends Tools {
         for (maxDistance = dis.getPDB_Distance(); maxDistance < MAX_MOVES; maxDistance += 2) {
             System.out.println(maxDistance);
 
-            if (emptyPosition % 4 != 0)   L();
-            if (emptyPosition % 4 != N-1) R();
-            if (emptyPosition / 4 != 0)   U();
-            if (emptyPosition / 4 != N-1) D();
+            if (emptyPosition % N != 0)   L();
+            if (emptyPosition % N != N-1) R();
+            if (emptyPosition / N != 0)   U();
+            if (emptyPosition / N != N-1) D();
 
             if (solutionCount > 0) break;
         }
@@ -61,9 +61,9 @@ public class IDAstar_663PDB extends Tools {
         
         emptyPosition--;
         swap(scram, emptyPosition, emptyPosition+1);
-        if (emptyPosition % 4 != 0)   L();
-        if (emptyPosition / 4 != 0)   U();
-        if (emptyPosition / 4 != N-1) D();
+        if (emptyPosition % N != 0)   L();
+        if (emptyPosition / N != 0)   U();
+        if (emptyPosition / N != N-1) D();
         swap(scram, emptyPosition, emptyPosition+1);
         emptyPosition++;
 
@@ -95,9 +95,9 @@ public class IDAstar_663PDB extends Tools {
         
         emptyPosition++;
         swap(scram, emptyPosition, emptyPosition-1);
-        if (emptyPosition % 4 != N-1) R();
-        if (emptyPosition / 4 != 0)   U();
-        if (emptyPosition / 4 != N-1) D();
+        if (emptyPosition % N != N-1) R();
+        if (emptyPosition / N != 0)   U();
+        if (emptyPosition / N != N-1) D();
         swap(scram, emptyPosition, emptyPosition-1);
         emptyPosition--;
 
@@ -107,35 +107,35 @@ public class IDAstar_663PDB extends Tools {
     
     public void U() {
         moves++;
-        dis.updatePDB_ID(scram[emptyPosition-4], 4);
+        dis.updatePDB_ID(scram[emptyPosition-N], N);
         
         if (moves + dis.getPDB_Distance() > maxDistance) {
             moves--;
-            dis.updatePDB_ID(scram[emptyPosition-4], -4);
+            dis.updatePDB_ID(scram[emptyPosition-N], -N);
             return;
         }
         
         route[moves] = 'U';
         
-        emptyPosition -= 4;
+        emptyPosition -= N;
         swap(scram, emptyPosition, emptyPosition+N);
-        if (emptyPosition % 4 != 0)   L();
-        if (emptyPosition % 4 != N-1) R();
-        if (emptyPosition / 4 != 0)   U();
+        if (emptyPosition % N != 0)   L();
+        if (emptyPosition % N != N-1) R();
+        if (emptyPosition / N != 0)   U();
         swap(scram, emptyPosition, emptyPosition+N);
-        emptyPosition += 4;
+        emptyPosition += N;
 
         moves--;
-        dis.updatePDB_ID(scram[emptyPosition-4], -4);
+        dis.updatePDB_ID(scram[emptyPosition-N], -N);
     }
 
     public void D() {
         moves++;
-        dis.updatePDB_ID(scram[emptyPosition+4], -4);
+        dis.updatePDB_ID(scram[emptyPosition+N], -N);
         
         if (moves + dis.getPDB_Distance() > maxDistance) {
             moves--;
-            dis.updatePDB_ID(scram[emptyPosition+4], 4);
+            dis.updatePDB_ID(scram[emptyPosition+N], N);
             return;
         }
         
@@ -147,19 +147,19 @@ public class IDAstar_663PDB extends Tools {
             System.out.println(solutionCount + ": " + routeString);
 
             moves--;
-            dis.updatePDB_ID(scram[emptyPosition+4], 4);
+            dis.updatePDB_ID(scram[emptyPosition+N], N);
             return;
         }
         
-        emptyPosition += 4;
+        emptyPosition += N;
         swap(scram, emptyPosition, emptyPosition-N);
-        if (emptyPosition % 4 != 0)   L();
-        if (emptyPosition % 4 != N-1) R();
-        if (emptyPosition / 4 != N-1) D();
+        if (emptyPosition % N != 0)   L();
+        if (emptyPosition % N != N-1) R();
+        if (emptyPosition / N != N-1) D();
         swap(scram, emptyPosition, emptyPosition-N);
-        emptyPosition -= 4;
+        emptyPosition -= N;
 
         moves--;
-        dis.updatePDB_ID(scram[emptyPosition+4], 4);
+        dis.updatePDB_ID(scram[emptyPosition+N], N);
     }
 }

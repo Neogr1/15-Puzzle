@@ -1,34 +1,34 @@
 import java.io.*;
 import java.util.*;
 
-public class PDB555 {
-    static final int[] BASE555 = {0, 0, 0, 1,
-                                  0, 0, 1, 1,
-                                  2, 2, 1, 1,
-                                  2, 2, 2, 3};
-    static final int[] POWER555 = {4, 3, 2, 4, 1, 0, 3, 2, 4, 3, 1, 0, 2, 1, 0, 0};
+public class PDB663 {
+    static final int[] BASE663 = {0, 0, 0, 0,
+                                  0, 0, 2, 2,
+                                  1, 1, 1, 2,
+                                  1, 1, 1, 3};
+    static final int[] POWER663 = {5, 4, 3, 2, 1, 0, 2, 1, 5, 4, 3, 0, 2, 1, 0, 0};
 
-    int[][][] data555 = new int[3][][];      // file data
-    int[][][] id555 = new int[3][][];        // id - dis
-    int[][] pdbDis555 = new int[3][1048576]; // dis (index is id)
+    int[][][] data663 = new int[3][][];      // file data
+    int[][][] id663 = new int[3][][];        // id - dis
+    int[][] pdbDis663 = new int[3][16777216]; // dis (index is id)
 
-    public PDB555() {
+    public PDB663() {
         try {
-            data555[0] = loadData("./db/555/0_1_2_4_5.csv");
-            data555[1] = loadData("./db/555/3_6_7_10_11.csv");
-            data555[2] = loadData("./db/555/8_9_12_13_14.csv");
+            data663[0] = loadData("./db/663/0_1_2_3_4_5.csv");
+            data663[1] = loadData("./db/663/8_9_10_12_13_14.csv");
+            data663[2] = loadData("./db/663/6_7_11.csv");
         } catch (IOException e) {
             e.printStackTrace();
             return;
         }
 
-        id555[0] = getIdAndDis(data555[0], 5);
-        id555[1] = getIdAndDis(data555[1], 5);
-        id555[2] = getIdAndDis(data555[2], 5);
+        id663[0] = getIdAndDis(data663[0], 6);
+        id663[1] = getIdAndDis(data663[1], 6);
+        id663[2] = getIdAndDis(data663[2], 3);
 
-        for (int i = 0; i < id555[0].length; i++) pdbDis555[0][id555[0][i][0]] = id555[0][i][1];
-        for (int i = 0; i < id555[1].length; i++) pdbDis555[1][id555[1][i][0]] = id555[1][i][1];
-        for (int i = 0; i < id555[2].length; i++) pdbDis555[2][id555[2][i][0]] = id555[2][i][1];
+        for (int i = 0; i < id663[0].length; i++) pdbDis663[0][id663[0][i][0]] = id663[0][i][1];
+        for (int i = 0; i < id663[1].length; i++) pdbDis663[1][id663[1][i][0]] = id663[1][i][1];
+        for (int i = 0; i < id663[2].length; i++) pdbDis663[2][id663[2][i][0]] = id663[2][i][1];
     }
     
     private int[][] loadData(String fileName) throws IOException {
@@ -65,21 +65,23 @@ public class PDB555 {
 
 
     
-    int[] id = new int[4]; // 3 is enough. Here 4 is to handle error
+    int[] id;
 
     public void initPDB_ID(int[] scram) {
         int tile;
+        id = new int[4]; // 3 is enough. Here 4 is to handle error
+
         for (int i = 0; i < 16; i++) {
             tile = scram[i];
-            id[BASE555[tile]] += (i << (4 * POWER555[tile]));
+            id[BASE663[tile]] += (i << (4 * POWER663[tile]));
         }
     }
 
     public void updatePDB_ID(int tile, int dir) {
-        id[BASE555[tile]] += (dir << (4 * POWER555[tile]));
+        id[BASE663[tile]] += (dir << (4 * POWER663[tile]));
     }
 
     public int getPDB_Distance() {
-        return pdbDis555[0][id[0]] + pdbDis555[1][id[1]] + pdbDis555[2][id[2]];
+        return pdbDis663[0][id[0]] + pdbDis663[1][id[1]] + pdbDis663[2][id[2]];
     }
 }

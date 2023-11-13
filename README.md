@@ -1,4 +1,4 @@
 # 15-Puzzle
 
 ### TODO
-- 663 구현
+- database 파일 사이즈 축소

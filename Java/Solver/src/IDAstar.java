@@ -33,10 +33,10 @@ public class IDAstar extends Tools {
         for (maxDistance = md % 2; maxDistance < MAX_MOVES; maxDistance += 2) {
             System.out.println(maxDistance);
 
-            if (emptyPosition % 4 != 0)   L();
-            if (emptyPosition % 4 != N-1) R();
-            if (emptyPosition / 4 != 0)   U();
-            if (emptyPosition / 4 != N-1) D();
+            if (emptyPosition % N != 0)   L();
+            if (emptyPosition % N != N-1) R();
+            if (emptyPosition / N != 0)   U();
+            if (emptyPosition / N != N-1) D();
 
             if (solutionCount > 0) break;
         }
@@ -49,7 +49,7 @@ public class IDAstar extends Tools {
     public void L() {
         moves++;
         emptyPosition--;
-        int diff_md = emptyPosition % 4 < scram[emptyPosition] % 4 ? -1 : 1;
+        int diff_md = emptyPosition % N < scram[emptyPosition] % N ? -1 : 1;
         md += diff_md;
 
         if (moves + md > maxDistance) {
@@ -62,9 +62,9 @@ public class IDAstar extends Tools {
         route[moves] = 'L';
 
         swap(scram, emptyPosition, emptyPosition+1);
-        if (emptyPosition % 4 != 0)   L();
-        if (emptyPosition / 4 != 0)   U();
-        if (emptyPosition / 4 != N-1) D();
+        if (emptyPosition % N != 0)   L();
+        if (emptyPosition / N != 0)   U();
+        if (emptyPosition / N != N-1) D();
         swap(scram, emptyPosition, emptyPosition+1);
 
         md -= diff_md;
@@ -75,7 +75,7 @@ public class IDAstar extends Tools {
     public void R() {
         moves++;
         emptyPosition++;
-        int diff_md = emptyPosition % 4 > scram[emptyPosition] % 4 ? -1 : 1;
+        int diff_md = emptyPosition % N > scram[emptyPosition] % N ? -1 : 1;
         md += diff_md;
 
         if (moves + md > maxDistance) {
@@ -98,9 +98,9 @@ public class IDAstar extends Tools {
         }
 
         swap(scram, emptyPosition, emptyPosition-1);
-        if (emptyPosition % 4 != N-1) R();
-        if (emptyPosition / 4 != 0)   U();
-        if (emptyPosition / 4 != N-1) D();
+        if (emptyPosition % N != N-1) R();
+        if (emptyPosition / N != 0)   U();
+        if (emptyPosition / N != N-1) D();
         swap(scram, emptyPosition, emptyPosition-1);
 
         md -= diff_md;
@@ -111,7 +111,7 @@ public class IDAstar extends Tools {
     public void U() {
         moves++;
         emptyPosition -= N;
-        int diff_md = emptyPosition / 4 < scram[emptyPosition] / 4 ? -1 : 1;
+        int diff_md = emptyPosition / N < scram[emptyPosition] / N ? -1 : 1;
         md += diff_md;
 
         if (moves + md > maxDistance) {
@@ -124,9 +124,9 @@ public class IDAstar extends Tools {
         route[moves] = 'U';
 
         swap(scram, emptyPosition, emptyPosition+N);
-        if (emptyPosition % 4 != 0)   L();
-        if (emptyPosition % 4 != N-1) R();
-        if (emptyPosition / 4 != 0)   U();
+        if (emptyPosition % N != 0)   L();
+        if (emptyPosition % N != N-1) R();
+        if (emptyPosition / N != 0)   U();
         swap(scram, emptyPosition, emptyPosition+N);
 
         md -= diff_md;
@@ -137,7 +137,7 @@ public class IDAstar extends Tools {
     public void D() {
         moves++;
         emptyPosition += N;
-        int diff_md = emptyPosition / 4 > scram[emptyPosition] / 4 ? -1 : 1;
+        int diff_md = emptyPosition / N > scram[emptyPosition] / N ? -1 : 1;
         md += diff_md;
         
         if (moves + md > maxDistance) {
@@ -160,9 +160,9 @@ public class IDAstar extends Tools {
         }
 
         swap(scram, emptyPosition, emptyPosition-N);
-        if (emptyPosition % 4 != 0)   L();
-        if (emptyPosition % 4 != N-1) R();
-        if (emptyPosition / 4 != N-1) D();
+        if (emptyPosition % N != 0)   L();
+        if (emptyPosition % N != N-1) R();
+        if (emptyPosition / N != N-1) D();
         swap(scram, emptyPosition, emptyPosition-N);
 
         md -= diff_md;
