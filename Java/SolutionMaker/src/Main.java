@@ -56,6 +56,10 @@ public class Main extends Tools {
                     writer.append(",");
                 }
 
+                for (int i = solver.optimalDistance+1; i < 80; i++) {
+                    writer.append(",");
+                }
+
                 writer.append("\n");
 
             } catch (IOException e) {
